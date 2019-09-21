@@ -3,27 +3,31 @@ import {shellSort} from "./shellSort";
 import {selectSort} from "./selectSort";
 import {populSort} from "./populSort";
 import {mergeSort} from "./mergeSort"
+import {quickSort} from "./quickSort";
 
 let arr = [
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0,
-            9,7,5,3,1,2,4,6,8,0
+            5,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,
+            9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,
+            9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,
+            9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,
+            9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0,9,7,5,3,1,2,4,6,8,0
 ]
+
+/**
+ * 数组转换字符串函数
+ *
+ * @param {Array} _arr
+ * @return {String}
+ * @private
+ */
+function translateArrayToString(_arr) {
+    if(!Array.isArray(_arr)){
+        throw new TypeError()
+    }
+
+    let str = _arr.join(',')
+    return str
+}
 
 //测试插入排序时间性能
 console.time('insertSort')
@@ -50,23 +54,18 @@ console.time('mergeSort')
 let resultForMergeSort = mergeSort(arr)
 console.timeEnd('mergeSort')
 
+//测试快速排序时间性能
+console.time('quickSort')
+let resultForQuickSort = quickSort(arr)
+console.timeEnd('quickSort')
+
 // console.log(translateArrayToString(resultForInsertSort))
 // console.log(translateArrayToString(resultForShellSort))
 // console.log(translateArrayToString(resultForSelectSort))
 // console.log(translateArrayToString(resultForPopulSort))
 // console.log(translateArrayToString(resultForMergeSort))
-/**
- * 数组转换字符串函数
- *
- * @param {Array} _arr
- * @return {String}
- * @private
- */
-function translateArrayToString(_arr) {
-    if(!Array.isArray(_arr)){
-        throw new TypeError()
-    }
+// console.log(translateArrayToString(resultForQuickSort))
+//
+//
 
-    let str = _arr.join(',')
-    return str
-}
+

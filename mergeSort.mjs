@@ -11,50 +11,65 @@
  * @return {Array}
  * @public
  */
-
 function mergeSort(_arr) {
     if(!Array.isArray(_arr)){
         throw new Error('Param is not fit type [Array].')
     }
-
     let arr = _arr.slice()
     let length = arr.length
-
     if(length <= 1){
         return arr
     }
-
-    return merge(arr)
+    merge(arr,0,arr.length - 1)
+    return arr
 }
-
 /**
  * 归并排序的递归函数
  *
- * @param {Array} _arr
- * @return {Array}
+ * @param {Array} arr
+ * @param {Number} left
+ * @param {Number} right
+ * @return {void}
  * @private
  */
-function merge(_arr){
+function merge(arr,left,right){
 
-    if(_arr.length == 1){
-        return _arr
+    let middle = Math.floor((left + right) / 2)
+    if(left == right){
+        return
     }
+    merge(arr,left,middle)
+    merge(arr,middle +  1,right)
+    afterMerge(arr,left,middle,right)
+}
+/**
+ * 归并排序的归并函数
+ *
+ * @param {Array} arr
+ * @param {Number} left
+ * @param {Number} middle
+ * @param {Number} right
+ * @return {void}
+ * @private
+ */
+function afterMerge(arr,left,middle,right) {
 
-    let boundary = Math.floor(_arr.length / 2)
-    let left = _arr.slice(0,boundary)
-    let right = _arr.slice(boundary)
-    let leftReturn = merge(left)
-    let rightReturn = merge(right)
-    let temp = new Array(leftReturn.length + rightReturn.length)
-    let i = 0,j = 0,k = 0
+    let temp = new Array(right - left + 1)
+    let i = left
+    let j = middle +1
+    let k = 0
 
-    while (i < leftReturn.length && j < rightReturn.length)
-        temp[k++] = leftReturn[i] <= rightReturn[j] ? leftReturn[i++] : rightReturn[j++]
-    while (i < leftReturn.length)
-        temp[k++] = leftReturn[i++]
-    while (j < rightReturn.length)
-        temp[k++] = rightReturn[j++]
-
-    return temp
+    while (i <= middle && j<= right){
+        temp[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++]
+    }
+    while (i <= middle){
+        temp[k++] = arr[i++]
+    }
+    while (j <= right){
+        temp[k++] = arr[j++]
+    }
+    for(let a = 0 ; a < temp.length ; a++){
+        arr[left + a] = temp[a]
+    }
 }
 export {mergeSort}
